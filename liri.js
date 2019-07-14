@@ -25,11 +25,11 @@ spotify.search({ type: 'track', query: 'All the Small Things' }, function (err, 
 axios.get("http://www.omdbapi.com/?t=" + "Brave" + "&y=&plot=short&apikey=trilogy").then(
     function (response) {
         // Then we print out the imdbRating
-        console.log(JSON.stringify(response.data, null, 2));
+        // console.log(JSON.stringify(response.data, null, 2));
         console.log("Title: " + response.data.Title);
         console.log("Year: " + response.data.Year);
-        console.log("IMDB Rating: " + response.data.Rated);
-        console.log("Rotten Tomatoes Rating: " + response.data.Ratings.Source.Rotten);
+        console.log("Rated: " + response.data.Rated);
+        console.log(response.data.Ratings[1].Source + " Rating: " + response.data.Ratings[1].Value);
         console.log("Country: " + response.data.Country);
         console.log("Language: " + response.data.Language);
         console.log("Plot: " + response.data.Plot);
@@ -47,10 +47,10 @@ axios.get("http://www.omdbapi.com/?t=" + "Brave" + "&y=&plot=short&apikey=trilog
 axios.get("https://rest.bandsintown.com/artists/" + "Jinjer" + "/events?app_id=codingbootcamp").then(
     function (response) {
         // Then we print out the imdbRating
-        // console.log(JSON.stringify(response.data, null, 2));
-        console.log("The band is playing at: " + response.data.venue.name);
-        console.log("Location: " + response.data.venue.city + ", " + response.data.venue.region) + ", " + response.data.venue.country;
-        console.log("Date MMDDYYYY: " + response.data.venue.datetime);
+        console.log(JSON.stringify(response.data.venue[1], null, 2));
+        // console.log("The band is playing at: " + response.data.venue.name);
+        // console.log("Location: " + response.data.venue.city + ", " + response.data.venue.region) + ", " + response.data.venue.country;
+        // console.log("Date MMDDYYYY: " + response.data.venue.datetime);
     }
 );
 
