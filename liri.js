@@ -18,20 +18,22 @@ spotify.search({ type: 'track', query: 'All the Small Things' }, function (err, 
         return console.log('Error occurred: ' + err);
     }
 
-    console.log(data);
+    // console.log(data);
 });
 
-axios.get("http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy").then(
+// !!! change Brave back to search
+axios.get("http://www.omdbapi.com/?t=" + "Brave" + "&y=&plot=short&apikey=trilogy").then(
     function (response) {
         // Then we print out the imdbRating
-        console.log("Title: " + response.data);
-        // console.log("Year: " + response.data);
-        // console.log("IMDB: " + response.data);
-        // console.log("Rotten Tomatoes Rating: " + response.data);
-        // console.log("Country: " + response.data);
-        // console.log("Language: " + response.data);
-        // console.log("Plot: " + response.data);
-        // console.log("Actors: " + response.data);
+        console.log(JSON.stringify(response.data, null, 2));
+        console.log("Title: " + response.data.Title);
+        console.log("Year: " + response.data.Year);
+        console.log("IMDB Rating: " + response.data.Rated);
+        console.log("Rotten Tomatoes Rating: " + response.data.Ratings.Source.Rotten);
+        console.log("Country: " + response.data.Country);
+        console.log("Language: " + response.data.Language);
+        console.log("Plot: " + response.data.Plot);
+        console.log("Actors: " + response.data.Actors);
 
         //  If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
 
@@ -41,12 +43,14 @@ axios.get("http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy
     }
 );
 
-axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp").then(
+// !!! change Jinjer back to artist
+axios.get("https://rest.bandsintown.com/artists/" + "Jinjer" + "/events?app_id=codingbootcamp").then(
     function (response) {
         // Then we print out the imdbRating
-        console.log("The band is playing at: " + response.data);
-        // console.log("Location: " + response.data);
-        // console.log("Date MMDDYYYY: " + response.data);
+        // console.log(JSON.stringify(response.data, null, 2));
+        console.log("The band is playing at: " + response.data.venue.name);
+        console.log("Location: " + response.data.venue.city + ", " + response.data.venue.region) + ", " + response.data.venue.country;
+        console.log("Date MMDDYYYY: " + response.data.venue.datetime);
     }
 );
 

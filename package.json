@@ -26,6 +26,7 @@
   "homepage": "https://github.com/Tai-Nguyen-89/liri-node-app#readme",
   "dependencies": {
     "axios": "^0.19.0",
+    "dotenv": "^8.0.0",
     "node-spotify-api": "^1.1.1"
   }
 }
