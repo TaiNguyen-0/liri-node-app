@@ -13,12 +13,20 @@ var search = process.argv[2];
 // Access Spotify keys using the keys.js
 var spotify = new Spotify(keys.spotify);
 
-spotify.search({ type: 'track', query: 'All the Small Things' }, function (err, data) {
+// !!! change "All the Small Things" back to search.
+spotify.search({ type: 'track', query: 'Perennial' }, function (err, data) {
     if (err) {
         return console.log('Error occurred: ' + err);
     }
 
-    // console.log(data);
+    // var spotLink = data.tracks.href.items
+    // console.log(spotLink);
+    console.log(JSON.stringify(data, 2));
+    // console.log(JSON.stringify(data, null, 2));
+    // console.log("Artist: " + spotLink.album.artists);
+    // console.log("Song title: " + spotLink.name);
+    // console.log("Preview link: " + spotLink.preview_url);
+    // console.log("Album: " + spotLink.album);
 });
 
 // !!! change Brave back to search
@@ -49,16 +57,17 @@ axios.get("https://rest.bandsintown.com/artists/" + "BabyMetal" + "/events?app_i
     function (response) {
         // Then we print out the imdbRating
         // console.log(JSON.stringify(response.data[0], null, 2));
-        console.log("Performing Artists: " + response.data[0].lineup);
-        console.log("Venue: " + response.data[0].venue.name);
-        console.log("City: " + response.data[0].venue.city);
-        console.log("State: " + response.data[0].venue.region);
-        console.log("Country: " + response.data[0].venue.country);
 
-        // date format convertor
-        var date = new Date(response.data[0].datetime);
-        var newdate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-        console.log("Date: " + newdate);
+        // console.log("Performing Artists: " + response.data[0].lineup);
+        // console.log("Venue: " + response.data[0].venue.name);
+        // console.log("City: " + response.data[0].venue.city);
+        // console.log("State: " + response.data[0].venue.region);
+        // console.log("Country: " + response.data[0].venue.country);
+
+        // // date format converter
+        // var date = new Date(response.data[0].datetime);
+        // var newdate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+        // console.log("Date: " + newdate);
     }
 );
 
