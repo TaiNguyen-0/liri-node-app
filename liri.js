@@ -14,20 +14,22 @@ var search = process.argv[2];
 var spotify = new Spotify(keys.spotify);
 
 // !!! change "All the Small Things" back to search.
-spotify.search({ type: 'track', query: 'Perennial' }, function (err, data) {
-    if (err) {
-        return console.log('Error occurred: ' + err);
-    }
 
-    // var spotLink = data.tracks.href.items
-    // console.log(spotLink);
-    console.log(JSON.stringify(data, 2));
-    // console.log(JSON.stringify(data, null, 2));
-    // console.log("Artist: " + spotLink.album.artists);
-    // console.log("Song title: " + spotLink.name);
-    // console.log("Preview link: " + spotLink.preview_url);
-    // console.log("Album: " + spotLink.album);
-});
+spotify
+    .search({ type: 'track', query: 'Perennial', limit: 1, })
+    .then(function (response) {
+
+        var spotLink = response.tracks.items[0]
+        // console.log(response.tracks.items[0]);
+        console.log("Artist: " + spotLink.artists[0].name);
+        console.log("Album: " + spotLink.album.name);
+        console.log("Song title: " + spotLink.name);
+        console.log("Preview link: " + spotLink.preview_url);
+
+    })
+    .catch(function (err) {
+        console.log(err);
+    });
 
 // !!! change Brave back to search
 axios.get("http://www.omdbapi.com/?t=" + "Brave" + "&y=&plot=short&apikey=trilogy").then(
