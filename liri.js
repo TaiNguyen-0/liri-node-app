@@ -7,16 +7,24 @@ var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var axios = require("axios");
 
-// omdb search
-var search = process.argv[2];
+//  Takes user input and enters into search
+var inputString = process.argv
+var search = inputString[2];
+
+function runCommand(search, input1) {
+    if (search = "spotify-this") {
+        var song = input1;
+    return spotifyThis();
+    }
 
 // Access Spotify keys using the keys.js
 var spotify = new Spotify(keys.spotify);
 
-// !!! change "All the Small Things" back to search.
+// !!! change "All the Small Things" back to search by spotify-this-song
 
-spotify
-    .search({ type: 'track', query: 'Perennial', limit: 1, })
+function spotifyThis(song) {
+    spotify
+    .search({ type: 'track', query: song, limit: 1, })
     .then(function (response) {
 
         var spotLink = response.tracks.items[0]
@@ -30,8 +38,9 @@ spotify
     .catch(function (err) {
         console.log(err);
     });
+}
 
-// !!! change Brave back to search
+// !!! change Brave back to search by movie-this
 axios.get("http://www.omdbapi.com/?t=" + "Brave" + "&y=&plot=short&apikey=trilogy").then(
     function (response) {
         // Then we print out the imdbRating
@@ -54,7 +63,7 @@ axios.get("http://www.omdbapi.com/?t=" + "Brave" + "&y=&plot=short&apikey=trilog
     }
 );
 
-// !!! change Jinjer back to artist
+// !!! change Jinjer back to artist by concert-this
 axios.get("https://rest.bandsintown.com/artists/" + "BabyMetal" + "/events?app_id=codingbootcamp").then(
     function (response) {
         // Then we print out the imdbRating
@@ -72,4 +81,4 @@ axios.get("https://rest.bandsintown.com/artists/" + "BabyMetal" + "/events?app_i
         // console.log("Date: " + newdate);
     }
 );
-
+}
