@@ -17,13 +17,22 @@ var name = inputString[3];
 
 function runCommand() {
     if (search === "spotify-this") {
-        var song = name;
+        var song = name; {
+            if (!song)
+            song = "Bushes of Love"
+        }
         return spotifyThis(song);
-    } else if (search === "movie-this") {
-        var movie = name;
+    } if (search === "movie-this") {
+        var movie = name; {
+            if (!movie)
+            movie = "The Empire Strikes Back"
+        }
         return movieThis(movie);
     } else if (search === "concert-this") {
-        var liveShow = name;
+        var liveShow = name; {
+            if (!liveShow)
+            liveShow = "Galactic Empire"
+        }
         return concertThis(liveShow);
     } else if (search === "do-it") {
         return dewIt();
@@ -34,8 +43,6 @@ function runCommand() {
 }
 // Access Spotify keys using the keys.js
 var spotify = new Spotify(keys.spotify);
-
-// !!! change "All the Small Things" back to search by spotify-this-song
 
 function spotifyThis(song) {
     spotify
@@ -55,7 +62,6 @@ function spotifyThis(song) {
         });
 }
 
-// !!! change Brave back to search by movie-this
 function movieThis(movie) {
     axios.get("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy").then(
         function (response) {
@@ -125,14 +131,5 @@ function dewIt() {
 var runThis = function(argOne, argTwo) {
     runCommand(argOne, argTwo);
 }
-// function dewIt(){
-// 	fs.readFile('random.txt', 'utf8', function(error, data){
-// 		if (error){ 
-// 			return console.log(error);
-// 		}
-//         var dataArr = data.split(', ');
-//         runCommand(dataArr[0], dataArr[1]);
-// 	});
-// }
 
 runThis(process.argv[2], process.argv.slice(3).join(" "));
