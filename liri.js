@@ -7,10 +7,13 @@ var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var axios = require("axios");
 
+var fs = require("fs");
+
 //  Takes user input and enters into search
-// var inputString = process.argv
-var search = process.argv[2];
-var name = process.argv[3];
+var inputString = process.argv
+
+var search = inputString[2];
+var name = inputString[3];
 
 function runCommand() {
     if (search === "spotify-this") {
@@ -22,6 +25,11 @@ function runCommand() {
     } else if (search === "concert-this") {
         var liveShow = name;
         return concertThis(liveShow);
+    } else if (search === "do-it") {
+        return dewIt();
+    } else if (!search) {
+        console.log("Please search a song, movie, concert, with 'spotify-this', 'movie-this,' 'concert-this', followed by the search query or just 'do-it'")
+        return;
     }
 }
 // Access Spotify keys using the keys.js
@@ -55,7 +63,7 @@ function movieThis(movie) {
 
             console.log("Title: " + response.data.Title);
             console.log("Year: " + response.data.Year);
-            console.log("Rated: " + response.data.Rated);
+            console.log("Rating: " + response.data.imdbRating);
             console.log(response.data.Ratings[1].Source + " Rating: " + response.data.Ratings[1].Value);
             console.log("Country: " + response.data.Country);
             console.log("Language: " + response.data.Language);
@@ -92,4 +100,39 @@ function concertThis(liveShow) {
     );
 }
 
-runCommand();
+function dewIt() {
+    fs.readFile("random.txt", "utf8", function (error, data) {
+
+        if (error) {
+            return console.log(error);
+        } 
+
+        console.log(data);
+
+        var dataArr = data.split(", ");
+
+        // console.log(dataArr)
+        // var search = dataArr[0]
+        var name = dataArr[1]
+        // var song = data
+        spotifyThis(name);
+        // runCommand(search, name);
+        
+    
+    });
+}
+
+var runThis = function(argOne, argTwo) {
+    runCommand(argOne, argTwo);
+}
+// function dewIt(){
+// 	fs.readFile('random.txt', 'utf8', function(error, data){
+// 		if (error){ 
+// 			return console.log(error);
+// 		}
+//         var dataArr = data.split(', ');
+//         runCommand(dataArr[0], dataArr[1]);
+// 	});
+// }
+
+runThis(process.argv[2], process.argv.slice(3).join(" "));
