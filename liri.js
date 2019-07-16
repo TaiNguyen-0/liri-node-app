@@ -19,19 +19,19 @@ function runCommand() {
     if (search === "spotify-this") {
         var song = name; {
             if (!song)
-            song = "Bushes of Love"
+                song = "Bushes of Love"
         }
         return spotifyThis(song);
     } if (search === "movie-this") {
         var movie = name; {
             if (!movie)
-            movie = "The Empire Strikes Back"
+                movie = "The Empire Strikes Back"
         }
         return movieThis(movie);
     } else if (search === "concert-this") {
         var liveShow = name; {
             if (!liveShow)
-            liveShow = "Galactic Empire"
+                liveShow = "Galactic Empire"
         }
         return concertThis(liveShow);
     } else if (search === "do-it") {
@@ -75,12 +75,6 @@ function movieThis(movie) {
             console.log("Language: " + response.data.Language);
             console.log("Plot: " + response.data.Plot);
             console.log("Actors: " + response.data.Actors);
-
-            //  If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
-
-            //  * If you haven't watched "Mr. Nobody," then you should: <http://www.imdb.com/title/tt0485947/>
-
-            //  * It's on Netflix!
         }
     );
 }
@@ -111,25 +105,31 @@ function dewIt() {
 
         if (error) {
             return console.log(error);
-        } 
+        }
 
         console.log(data);
 
         var dataArr = data.split(", ");
 
-        // console.log(dataArr)
-        // var search = dataArr[0]
+        var search = dataArr[0]
         var name = dataArr[1]
-        // var song = data
-        spotifyThis(name);
+
+        if (search === "spotify-this") {
+            return spotifyThis(name);
+        } else if (search === "movie-this") {
+            return movieThis(name);
+        } else if (search === "concert-this") {
+            return concertThis(name);
+        }
         // runCommand(search, name);
-        
-    
+
+
     });
 }
 
-var runThis = function(argOne, argTwo) {
-    runCommand(argOne, argTwo);
-}
+runCommand();
+// var runThis = function(argOne, argTwo) {
+//     runCommand(argOne, argTwo);
+// }
 
-runThis(process.argv[2], process.argv.slice(3).join(" "));
+// runThis(process.argv[2], process.argv.slice(3).join(" "));
